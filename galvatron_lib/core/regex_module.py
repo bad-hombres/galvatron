@@ -25,7 +25,7 @@ class RegexModule(BaseModule):
                             self.scan_file(relative_location, full_location, product, version, extra_regex)
 
         except Exception as ex:
-            print ex
+            print(ex)
 
     def line_regex(self):
         return []

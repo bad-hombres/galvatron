@@ -2,7 +2,6 @@ from galvatron_lib.core.module import BaseModule
 from virus_total_apis import PublicApi as Api
 import hashlib
 import json
-import urllib2
 import time
 import os
 

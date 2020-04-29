@@ -17,7 +17,7 @@ import zipfile
 import tarfile
 import base64
 import requests, urllib, time
-import location_handlers
+import galvatron_lib.core.location_handlers
 
 # framework libs
 from galvatron_lib.utils.requests import Request
@@ -61,7 +61,7 @@ class Options(dict):
     def _autoconvert(self, value):
         if value in (None, True, False):
             return value
-        elif (isinstance(value, basestring)) and value.lower() in ('none', "''", '""'):
+        elif isinstance (value, str) and value.lower() in ('none', "''", '""'):
             return None
         orig = value
         for fn in (self._boolify, int, float):
@@ -185,17 +185,9 @@ class Framework(cmd.Cmd):
     #==================================================
 
     def to_unicode_str(self, obj, encoding='utf-8'):
-        # checks if obj is a string and converts if not
-        if not isinstance(obj, basestring):
-            obj = str(obj)
-        obj = self.to_unicode(obj, encoding)
-        return obj
+        return str(obj)
 
     def to_unicode(self, obj, encoding='utf-8'):
-        # checks if obj is a unicode string and converts if not
-        if isinstance(obj, basestring):
-            if not isinstance(obj, unicode):
-                obj = unicode(obj, encoding)
         return obj
 
     def is_hash(self, hashstr):

@@ -11,14 +11,14 @@ import random
 import re
 import shutil
 import sys
-import __builtin__
+import builtins
 import tempfile
 
 # import framework libs
 from galvatron_lib.core import framework
 
 # set the __version__ variable based on the VERSION file
-execfile(os.path.join(sys.path[0], 'VERSION'))
+exec(open(os.path.join(sys.path[0], 'VERSION')).read())
 
 # using stdout to spool causes tab complete issues
 # therefore, override print function
@@ -34,11 +34,11 @@ def spool_print(*args, **kwargs):
         if 'console' in kwargs and kwargs['console'] is False:
             return
         # new print function must still use the old print function via the backup
-        __builtin__._print(*args, **kwargs)
+        builtins._print(*args, **kwargs)
 # make a builtin backup of the original print function
-__builtin__._print = print
+builtins._print = print
 # override the builtin print function with the new print function
-__builtin__.print = spool_print
+builtins.print = spool_print
 
 KEY_RESOURCES = [
     'virus_total_api',
@@ -149,7 +149,7 @@ class Recon(framework.Framework):
             return True
         except ImportError as e:
             # notify the user of missing dependencies
-            self.error('Module \'%s\' disabled. Dependency required: \'%s\'' % (mod_dispname, e.message[16:]))
+            self.error('Module \'%s\' disabled. Dependency required: \'%s\'' % (mod_dispname, e))
         except:
             # notify the user of errors
             self.print_exception()

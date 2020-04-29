@@ -3,7 +3,6 @@ from galvatron_lib.core.framework import FrameworkException, Colors
 from datetime import datetime, timedelta
 import hashlib
 import json
-import urllib2
 import time
 import os
 import subprocess

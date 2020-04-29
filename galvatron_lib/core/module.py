@@ -1,8 +1,8 @@
 from __future__ import print_function
-import cookielib
+import http.cookiejar as cookielib
 import hashlib
 import hmac
-import HTMLParser
+from html.parser import HTMLParser
 import os
 import re
 import socket
@@ -12,7 +12,7 @@ import sys
 import textwrap
 import time
 import urllib
-import urlparse
+from urllib.parse import urlparse
 # framework libs
 from galvatron_lib.core import framework
 

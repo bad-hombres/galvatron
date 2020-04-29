@@ -3,7 +3,7 @@ import os
 import subprocess
 import shutil
 import fnmatch
-import xmlrpclib
+import xmlrpc.client as xmlrpclib
 import time
 from galvatron_lib.core.module import BaseModule
 
