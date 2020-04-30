@@ -17,7 +17,7 @@ import zipfile
 import tarfile
 import base64
 import requests, urllib, time
-import galvatron_lib.core.location_handlers
+import galvatron_lib.core.location_handlers as location_handlers
 
 # framework libs
 from galvatron_lib.utils.requests import Request
@@ -734,7 +734,7 @@ class Framework(cmd.Cmd):
         self._summary_counts[table][1] += 1
 
         # build RPC response
-        for key in data.keys():
+        for key in data.copy().keys():
             if not data[key]:
                 del data[key]
         self.rpc_cache.append(data)
@@ -1170,7 +1170,7 @@ class Framework(cmd.Cmd):
                 for column in columns:
                     try:
                         # prompt user for data
-                        value = raw_input('%s (%s): ' % column)
+                        value = input('%s (%s): ' % column)
                         record[sanitize_column(column[0])] = value
                     except KeyboardInterrupt:
                         print('')
@@ -1203,7 +1203,7 @@ class Framework(cmd.Cmd):
             else:
                 try:
                     # prompt user for data
-                    params = raw_input('rowid(s) (INT): ')
+                    params = input('rowid(s) (INT): ')
                     rowids = self._parse_rowids(params)
                 except KeyboardInterrupt:
                     print('')
